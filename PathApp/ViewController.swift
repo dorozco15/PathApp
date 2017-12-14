@@ -7,19 +7,49 @@
 //
 
 import UIKit
-
+enum TestStatus{
+    case start
+    case done
+}
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var questionLabel: UILabel!
+    private var testStatus : TestStatus = .start
+    private var currentQuestion: Question!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        if testStatus == .start{
+            handleStart()
+        }
+        handleQuestionUI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    private func handleStart(){
+        //load all labels and UI elements
+        currentQuestion = DataManager.getFirstQuestion()
+        
+    }
+    private func handleQuestionUI(){
+        //display question
+        questionLabel.text = currentQuestion.getQuestion()
+        
+        //determine question type
+        var questionType = currentQuestion.getType()
+        switch questionType{
+            
+        case .selectAnswer:
+            <#code#>
+        case .textField:
+            <#code#>
+        case .multiAnswer:
+            <#code#>
+        }
+    }
 }
 
